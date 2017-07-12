@@ -17,6 +17,9 @@ class BasicTest(TestCase):
 
 class AlarmTest(BasicTest):
 
-    def test_alarm(self):
+    def test_alarm_index(self):
         response = self.client.get("/alarm")
         self.assertEquals(response.status_code, 200)
+
+        response = self.client.get("/alarm/index")
+        self.assertEquals(response.status_code, 301)
