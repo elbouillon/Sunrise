@@ -7,6 +7,7 @@ class BasicTest(TestCase):
     
     def create_app(self):
         app.config['TESTING'] = True
+        app.config['BASIC_AUTH_FORCE'] = False
         return app
 
     def test_hello(self):
