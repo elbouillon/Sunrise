@@ -5,6 +5,7 @@ alarm = Blueprint("alarm", __name__,
     url_prefix="/alarm", 
     template_folder="templates")
 
+
 @alarm.route("/", defaults={"page": "index"}, strict_slashes=False)
 @alarm.route("/<page>")
 def show(page):
