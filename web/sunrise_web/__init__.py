@@ -1,5 +1,7 @@
 from flask import Flask
 from flask_basicauth import BasicAuth
+from flask_bootstrap import Bootstrap
+
 
 from sunrise_web import config
 from sunrise_web.alarm import alarm
@@ -11,7 +13,10 @@ app = Flask(__name__)
 app.config.from_object(config)
 
 # Basic auth
-basic_auth = BasicAuth(app)
+BasicAuth(app)
+
+# Bootstrap
+Bootstrap(app)
 
 # Register blueprints
 app.register_blueprint(alarm)
