@@ -1,5 +1,5 @@
-from flask_wtf import Form
-from wtforms import IntegerField
+from flask_mongoengine.wtf import model_form
 
-class AlarmForm(Form):
-    time = IntegerField('Time')
+from .models import Alarm
+
+AlarmForm = model_form(Alarm)

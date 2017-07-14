@@ -1,5 +1,8 @@
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, request, redirect
+from flask_mongoengine.wtf import model_form
 from jinja2 import TemplateNotFound
+
+from .models import Alarm
 from .forms import AlarmForm
 
 alarm = Blueprint("alarm", __name__, 
@@ -7,21 +10,30 @@ alarm = Blueprint("alarm", __name__,
     template_folder="templates")
 
 
-@alarm.route("/", strict_slashes=False)
-def index():
+@alarm.route("/")
+def show():
     try:
-
-        form = AlarmForm()
-        form.time=666
-
-        return render_template("pages/alarm.html",form=form)
+        alarm = Alarm.objects.first()
+    
+        if alarm is not  None:
+            form = AlarmForm(obj=alarm)
+        else:
+            form = AlarmForm()
+            
+        return render_template("pages/alarm.html", form=form)
     except TemplateNotFound:
         abort(404)
-    
-@alarm.route("/<int:alarm_id>", methods=['GET'])
-def show(alarm_id):
-    pass
-   # try:
-   #     return render_template("pages/alarm.html".format(page))
-   # except TemplateNotFound:
-   #     abort(404)
+
+
+@alarm.route("/save", methods=['POST'])
+def save():
+    alarm = Alarm.objects.first()
+
+    if alarm is None:
+        alarm = Alarm()
+  
+    form = AlarmForm(request.form, instance=alarm)
+    alarm = form.save()
+    alarm.save()
+            
+    return redirect('/alarm')

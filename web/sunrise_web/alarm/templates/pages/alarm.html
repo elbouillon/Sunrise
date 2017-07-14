@@ -1,19 +1,15 @@
 {% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block content %}
 
-<form method="PUT" name="alarm">
- <!-- 
-   <div class="form-group">
-    <label for="time">Time</label>
-    <input type="number" class="form-control" id="time" placeholder="0500">
+<form method="POST" action="save" role="form">
+  
+  <div class="form-group">
+     {{ wtf.form_field(form.time) }}
   </div>
   <button type="submit" class="btn btn-success">Save</button>
-  -->
-   <p>
-          Please enter your time:<br>
-          {{ form.time}}<br>
-      </p>
+  
 </form>
 
 {% endblock %}

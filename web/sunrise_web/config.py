@@ -12,3 +12,9 @@ BOOTSTRAP_SERVE_LOCAL = True
 
 # Flask WTF 
 WTF_CSRF_ENABLED = False
+
+# MongoDB
+MONGODB_SETTINGS = {
+    'db': 'sunrise_db',
+    'host': 'mongodb://192.168.99.100/sunrise',
+}
