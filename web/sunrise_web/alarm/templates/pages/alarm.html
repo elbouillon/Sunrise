@@ -1,0 +1,19 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+
+<form method="PUT" name="alarm">
+ <!-- 
+   <div class="form-group">
+    <label for="time">Time</label>
+    <input type="number" class="form-control" id="time" placeholder="0500">
+  </div>
+  <button type="submit" class="btn btn-success">Save</button>
+  -->
+   <p>
+          Please enter your time:<br>
+          {{ form.time}}<br>
+      </p>
+</form>
+
+{% endblock %}
