@@ -25,14 +25,15 @@ def show():
         abort(404)
 
 
-@alarm.route("/save", methods=['POST'])
+@alarm.route("/", methods=['POST'])
 def save():
     alarm = Alarm.objects.first()
 
-    if alarm is None:
-        alarm = Alarm()
+    if alarm is not None:
+        form = AlarmForm(request.form, instance=alarm)
+    else:
+        form = AlarmForm(request.form)
   
-    form = AlarmForm(request.form, instance=alarm)
     alarm = form.save()
     alarm.save()
             
