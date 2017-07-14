@@ -1,22 +1,23 @@
 from flask import Flask
 from flask_testing import TestCase
 
-from sunrise_web import app, db
+from sunrise_web import create_app as create_app_base, db
 from sunrise_web.alarm.models import Alarm
 
 class BasicTest(TestCase):
     
     def create_app(self):
-        app.config['TESTING'] = True
-        app.config['BASIC_AUTH_FORCE'] = False
-        app.config['MONGODB_SETTINGS'] = {
-            'db': 'sunrise',
-            'host': 'mongodb://192.168.99.100/sunrise',
-        }
-        return app
+        return create_app_base(
+            TESTING = True,
+            BASIC_AUTH_FORCE = False,
+            MONGODB_SETTINGS = {
+                'db': 'sunrise_test',
+                'host': 'mongodb://192.168.99.100/sunrise_test',
+            }
+        )
 
     def tearDown(self):
-        db.connection.drop_database('sunrise')
+        db.connection.drop_database('sunrise_test')
 
     def test_404(self):
         response = self.client.get("/404")

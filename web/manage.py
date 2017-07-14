@@ -1,8 +1,8 @@
 from flask_script import Manager
 
-from sunrise_web import app
+from sunrise_web import create_app
 
-manager = Manager(app)
+manager = Manager(create_app)
 
 @manager.command
 def routes():

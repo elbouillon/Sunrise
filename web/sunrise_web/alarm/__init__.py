@@ -5,12 +5,12 @@ from jinja2 import TemplateNotFound
 from .models import Alarm
 from .forms import AlarmForm
 
-alarm = Blueprint("alarm", __name__, 
+alarm_blueprint = Blueprint("alarm", __name__, 
     url_prefix="/alarm", 
     template_folder="templates")
 
 
-@alarm.route("/")
+@alarm_blueprint.route("/")
 def show():
     try:
         alarm = Alarm.objects.first()
@@ -25,7 +25,7 @@ def show():
         abort(404)
 
 
-@alarm.route("/", methods=['POST'])
+@alarm_blueprint.route("/", methods=['POST'])
 def save():
     alarm = Alarm.objects.first()
 
