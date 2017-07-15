@@ -46,11 +46,13 @@ class AlarmTest(BasicTest):
 
     def test_alarm_save(self):
         response = self.client.post("/alarm/", data=dict(
-            time=666
+            time=666,
+            active=True
         ), follow_redirects=True)
 
         self.assertStatus(response, 200)
         alarm = Alarm.objects.first()
         self.assertIsNotNone(alarm)
         self.assertEquals(alarm.time, 666)
+        self.assertTrue(alarm.active)
 
