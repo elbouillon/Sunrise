@@ -27,14 +27,17 @@ def show():
 
 @alarm_blueprint.route("/", methods=['POST'])
 def save():
-    alarm = Alarm.objects.first()
+    try:
+        alarm = Alarm.objects.first()
 
-    if alarm is not None:
-        form = AlarmForm(request.form, instance=alarm)
-    else:
-        form = AlarmForm(request.form)
-  
-    alarm = form.save()
-    alarm.save()
-            
-    return redirect('/alarm')
+        if alarm is not None:
+            form = AlarmForm(request.form, instance=alarm)
+        else:
+            form = AlarmForm(request.form)
+    
+        alarm = form.save()
+        alarm.save()
+
+        return render_template("pages/alarm.html", form=form)
+    except TemplateNotFound:
+        abort(404)
