@@ -1,76 +1,22 @@
-{% extends "bootstrap/base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+<!doctype html>
+<html>
 
-{% block content %}
-<div class="container">
+<head>
+</head>
 
-    <form action="#" method="POST" class="form" role="form">
-        <div class="row">
-            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                {{form.time(class="form-control",placeholder="50000", type="number")}}    
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                {{form.active()}}
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="btn-group btn-group-justified col-xs-12 col-sm-12 col-md-12 col-lg-12" role="group">
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default">
-                        {{form.weekday_1()}} {{form.weekday_1.label.text}}
-                    </label>
-                </div>
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default">
-                        {{form.weekday_2()}} {{form.weekday_2.label.text}}
-                    </label>
-                </div>
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default">
-                        {{form.weekday_3()}} {{form.weekday_3.label.text}}
-                    </label>
-                </div>
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default">
-                        {{form.weekday_4()}} {{form.weekday_4.label.text}}
-                    </label>
-                </div>
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default">
-                        {{form.weekday_5()}} {{form.weekday_5.label.text}}
-                    </label>
-                </div>
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default">
-                        {{form.weekday_6()}} {{form.weekday_6.label.text}}
-                    </label>
-                </div>
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default">
-                        {{form.weekday_7()}} {{form.weekday_7.label.text}}
-                    </label>
-                </div>
-            </div>
-        </div>
- 
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <button type="submit" class="btn btn-block btn-success">Save</button>
-            </div>
-        </div>
-    
+<body>
+    <form method="POST" action="#" name="alarm">
+        <div>{{ form.time }}</div>
+        <div>{{ form.active.label }} {{ form.active }}</div>
+        <div>{{ form.day_1.label }} {{ form.day_1 }} </div>
+        <div>{{ form.day_2.label }} {{ form.day_2 }}</div>
+        <div>{{ form.day_3.label }} {{ form.day_3 }}</div>
+        <div>{{ form.day_4.label }} {{ form.day_4 }}</div>
+        <div>{{ form.day_5.label }} {{ form.day_5 }}</div>
+        <div>{{ form.day_6.label }} {{ form.day_6 }}</div>
+        <div>{{ form.day_7.label }} {{ form.day_7 }}</div>
+        <button type="submit">Save</button>
     </form>
+</body>
 
-</div>
-{% endblock %}
-
-{% block scripts %}
-{{super()}}
- <script>
-
-// Activate label for all checked inputs
-$('input[type=checkbox]:checked').closest('label').addClass('active');
-
-</script>
-{% endblock %}
+</html>
