@@ -18,9 +18,5 @@ class BasicTest(TestCase):
     def tearDown(self):
         db.connection.drop_database('sunrise_test')
 
-    def test_404(self):
-        response = self.client.get("/404")
-        self.assertEquals(response.status_code, 404)
-
 
 
