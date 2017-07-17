@@ -1,0 +1,22 @@
+{
+  "name": "sunrise_web",
+  "version": "1.0.0",
+  "description": "npm sunrise web",
+  "main": "gulpfile.js",
+  "directories": {
+    "man": "man",
+    "test": "tests"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.12",
+    "gulp": "^3.9.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Willy KURMANN",
+  "license": "ISC"
+}
