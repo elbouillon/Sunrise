@@ -22,4 +22,24 @@ class AlarmDBTest(BasicTest):
         self.assertEquals(alarm.active, True)
         self.assertEquals(alarm.day_1, True)
 
+class AlarmTest(BasicTest):
+
+    def test_alarm_show(self):
+        response = self.client.get("/alarm/")
+        self.assertStatus(response, 200)
+
+    def test_alarm_save(self):
+        response = self.client.post("/alarm/", data=dict(
+            time= 500,
+            active=True,
+            day_1=True
+        ), follow_redirects=True)
+
+        self.assertStatus(response, 200)
+        alarm = Alarm.objects.first()
+        self.assertIsNotNone(alarm)
+        self.assertEquals(alarm.time, 500)
+        self.assertTrue(alarm.active)
+        self.assertEquals(alarm.day_1, True)
+
     
