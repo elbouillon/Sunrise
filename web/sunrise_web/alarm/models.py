@@ -1,13 +1,13 @@
-from mongoengine import Document, IntField, BooleanField, ListField
+from mongoengine import Document, BooleanField, IntField
 
 class Alarm(Document):
-    time = IntField(min_value=0, max_value=2359, verbose_name='Time')
-    active = BooleanField(default=False)
-    weekday_1 = BooleanField(default=False, verbose_name='MO')
-    weekday_2 = BooleanField(default=False, verbose_name='TU')
-    weekday_3 = BooleanField(default=False, verbose_name='WE')
-    weekday_4 = BooleanField(default=False, verbose_name='TH')
-    weekday_5 = BooleanField(default=False, verbose_name='FR')
-    weekday_6 = BooleanField(default=False, verbose_name='SA')
-    weekday_7 = BooleanField(default=False, verbose_name='SU')
+    time = IntField(verbose_name='Time')
+    active = BooleanField(default=False, verbose_name='Active')
+    day_1 = BooleanField(default=False, verbose_name='MO')
+    day_2 = BooleanField(default=False, verbose_name='TU')
+    day_3 = BooleanField(default=False, verbose_name='WE')
+    day_4 = BooleanField(default=False, verbose_name='TH')
+    day_5 = BooleanField(default=False, verbose_name='FR')
+    day_6 = BooleanField(default=False, verbose_name='SA')
+    day_7 = BooleanField(default=False, verbose_name='SU')
 
