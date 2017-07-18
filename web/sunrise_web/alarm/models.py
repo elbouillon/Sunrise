@@ -1,7 +1,7 @@
-from mongoengine import Document, BooleanField, IntField
+from mongoengine import Document, BooleanField, StringField
 
 class Alarm(Document):
-    time = IntField(verbose_name='Time')
+    time = StringField(verbose_name='Time',  max_length=5)
     active = BooleanField(default=False, verbose_name='Active')
     day_1 = BooleanField(default=False, verbose_name='MO')
     day_2 = BooleanField(default=False, verbose_name='TU')
