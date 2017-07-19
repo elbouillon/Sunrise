@@ -30,7 +30,7 @@ class AlarmTest(BasicTest):
 
     def test_alarm_save(self):
         response = self.client.post("/alarm/", data=dict(
-            time= "05:00",
+            time= "06:00",
             active=True,
             day_1=True
         ), follow_redirects=True)
@@ -38,7 +38,10 @@ class AlarmTest(BasicTest):
         self.assertStatus(response, 200)
         alarm = Alarm.objects.first()
         self.assertIsNotNone(alarm)
-        self.assertEquals(alarm.time, "05:00")
+        self.assertEquals(alarm.time, "06:00")
         self.assertTrue(alarm.active)
         self.assertEquals(alarm.day_1, True)
 
+    def test_alarm_json(self):
+        response = self.client.get("/alarm/json")
+        self.assertStatus(response, 200)
