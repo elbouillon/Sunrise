@@ -8,7 +8,7 @@ from sunrise_web.alarm.models import Alarm
 class AlarmDBTest(BasicTest):
 
     def setUp(self):
-        alarm = Alarm(time="05:00", active=True, day_1=True)
+        alarm = Alarm(time="05:00", active=True, day_of_week_1=True)
         alarm.save()
     
     def tearDown(self):
@@ -20,7 +20,7 @@ class AlarmDBTest(BasicTest):
         self.assertIsNotNone(alarm)
         self.assertEquals(alarm.time, "05:00")
         self.assertEquals(alarm.active, True)
-        self.assertEquals(alarm.day_1, True)
+        self.assertEquals(alarm.day_of_week_1, True)
 
 class AlarmTest(BasicTest):
 
@@ -32,7 +32,7 @@ class AlarmTest(BasicTest):
         response = self.client.post("/alarm/", data=dict(
             time= "06:00",
             active=True,
-            day_1=True
+            day_of_week_1=True
         ))
 
         self.assertStatus(response, 302)
@@ -40,4 +40,4 @@ class AlarmTest(BasicTest):
         self.assertIsNotNone(alarm)
         self.assertEquals(alarm.time, "06:00")
         self.assertTrue(alarm.active)
-        self.assertEquals(alarm.day_1, True)
+        self.assertEquals(alarm.day_of_week_1, True)
