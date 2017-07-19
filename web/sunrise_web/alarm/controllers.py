@@ -26,17 +26,7 @@ def save():
         form = AlarmForm(request.form, instance=alarm)
     else:
         form = AlarmForm(request.form)
-    
-    alarm = form.save()
-    alarm.save()
-        
-    return redirect('/alarm', 200)
 
-@alarm_blueprint.route("/json", methods=['GET'])
-def as_json():
-    alarm = Alarm.objects.first()
-       
-    if alarm is None:
-        alarm = Alarm()
-    
-    return jsonify(alarm.as_json())
+    form.save()
+        
+    return redirect('/alarm')
