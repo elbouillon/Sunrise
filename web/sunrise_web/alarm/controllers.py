@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, jsonify
 
 from .models import Alarm
 from .forms import AlarmForm
@@ -11,7 +11,7 @@ alarm_blueprint = Blueprint("alarm", __name__,
 def show():
     alarm = Alarm.objects.first()
     
-    if alarm is not  None:
+    if alarm is None:
         alarm = Alarm()
 
     form = AlarmForm(obj=alarm)
@@ -22,10 +22,19 @@ def show():
 def save():
     alarm = Alarm.objects.first()
 
-    if alarm is not None:
+    if alarm is None:
         alarm = Alarm()
 
     form = AlarmForm(request.form, instance=alarm)
     form.save()
         
     return redirect('/alarm')
+
+@alarm_blueprint.route("/json", methods=['GET'])
+def to_json():
+    alarm = Alarm.objects.first()
+    
+    if alarm is None:
+        alarm = Alarm()
+    
+    return jsonify(alarm)
