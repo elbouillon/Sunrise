@@ -6,7 +6,8 @@
 
 <body>
     <form method="POST" action="#" name="alarm">
-        <div>{{ form.time(type="time") }}</div>
+        <div>{{ form.hour(type="number") }}</div>
+        <div>{{ form.minute(type="number") }}</div>
         <div>{{ form.active.label }} {{ form.active }}</div>
         <div>{{ form.day_of_week_1.label }} {{ form.day_of_week_1 }} </div>
         <div>{{ form.day_of_week_2.label }} {{ form.day_of_week_2 }}</div>
