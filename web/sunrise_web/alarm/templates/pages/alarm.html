@@ -2,22 +2,47 @@
 <html>
 
 <head>
+    <script src="{{ url_for('static',filename='scripts/jquery.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/tachyons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/flexboxgrid.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/sunrise.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
-    <form method="POST" action="#" name="alarm">
-        <div>{{ form.hour(type="number") }}</div>
-        <div>{{ form.minute(type="number") }}</div>
-        <div>{{ form.active.label }} {{ form.active }}</div>
-        <div>{{ form.day_of_week_1.label }} {{ form.day_of_week_1 }} </div>
-        <div>{{ form.day_of_week_2.label }} {{ form.day_of_week_2 }}</div>
-        <div>{{ form.day_of_week_3.label }} {{ form.day_of_week_3 }}</div>
-        <div>{{ form.day_of_week_4.label }} {{ form.day_of_week_4 }}</div>
-        <div>{{ form.day_of_week_5.label }} {{ form.day_of_week_5 }}</div>
-        <div>{{ form.day_of_week_6.label }} {{ form.day_of_week_6 }}</div>
-        <div>{{ form.day_of_week_7.label }} {{ form.day_of_week_7 }}</div>
-        <button type="submit">Save</button>
+<body class="w-100 fixed">
+    <form action="#" method="POST">
+        <div id="main" class="row center-xs">
+            <div class="box">
+
+                <h1>SUNRISE</h1>
+                <h2>Hello, Boss !</h2>
+
+                <div class="row pv4 center-xs">
+                    <div class="box">
+                        <div class="ba br2 pa1">
+                            {{form.hour(type="number",class="tc bn w3")}} : {{ form.minute(type="number",class="tc bn w3")}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row between-xs pb4">
+                    <span class="dib"> {{form.day_of_week_1.label}}<div>{{form.day_of_week_1}}</div></span>
+                    <span class="dib"> {{form.day_of_week_2.label}}<div>{{form.day_of_week_2}}</div></span>
+                    <span class="dib"> {{form.day_of_week_3.label}}<div>{{form.day_of_week_3}}</div></span>
+                    <span class="dib"> {{form.day_of_week_4.label}}<div>{{form.day_of_week_4}}</div></span>
+                    <span class="dib"> {{form.day_of_week_5.label}}<div>{{form.day_of_week_5}}</div></span>
+                    <span class="dib"> {{form.day_of_week_6.label}}<div>{{form.day_of_week_6}}</div></span>
+                    <span class="dib"> {{form.day_of_week_7.label}}<div>{{form.day_of_week_7}}</div></span>
+                </div>
+
+                <div class="row pt4">
+                    <div class="box w-100">
+                        <button type="submit" class="w5">Save</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </form>
-</body>
 
 </html>
