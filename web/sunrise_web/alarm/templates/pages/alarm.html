@@ -11,38 +11,32 @@
 
 <body class="w-100 fixed">
     <form action="#" method="POST">
-        <div id="main" class="row center-xs">
+
+        <h1 class="tc">SUNRISE</h1>
+        <h2 class="tc">Welcome, Boss</h2>
+
+        <section class="row center-xs pv4">
             <div class="box">
-
-                <h1>SUNRISE</h1>
-                <h2>Hello, Boss !</h2>
-
-                <div class="row pv4 center-xs">
-                    <div class="box">
-                        <div class="ba br2 pa1">
-                            {{form.hour(type="number",class="tc bn w3")}} : {{ form.minute(type="number",class="tc bn w3")}}
-                        </div>
-                    </div>
+                <div class="ba br2 pa1">
+                    <span>{{form.hour(type="number",class="w3 tc bn")}}</span>:
+                    <span>{{form.minute(type="number",class="w3 tc bn")}}</span>
                 </div>
-
-                <div class="row between-xs pb4">
-                    <span class="dib"> {{form.day_of_week_1.label}}<div>{{form.day_of_week_1}}</div></span>
-                    <span class="dib"> {{form.day_of_week_2.label}}<div>{{form.day_of_week_2}}</div></span>
-                    <span class="dib"> {{form.day_of_week_3.label}}<div>{{form.day_of_week_3}}</div></span>
-                    <span class="dib"> {{form.day_of_week_4.label}}<div>{{form.day_of_week_4}}</div></span>
-                    <span class="dib"> {{form.day_of_week_5.label}}<div>{{form.day_of_week_5}}</div></span>
-                    <span class="dib"> {{form.day_of_week_6.label}}<div>{{form.day_of_week_6}}</div></span>
-                    <span class="dib"> {{form.day_of_week_7.label}}<div>{{form.day_of_week_7}}</div></span>
-                </div>
-
-                <div class="row pt4">
-                    <div class="box w-100">
-                        <button type="submit" class="w5">Save</button>
-                    </div>
-                </div>
-
             </div>
-        </div>
+        </section>
+
+        <section class="row around-xs ph4 pb4">
+            <span class="tc">{{form.day_of_week_1.label}} <div class="pa2">{{form.day_of_week_1}}</div></span>
+            <span class="tc">{{form.day_of_week_2.label}} <div class="pa2">{{form.day_of_week_2}}</div></span>
+            <span class="tc">{{form.day_of_week_3.label}} <div class="pa2">{{form.day_of_week_3}}</div></span>
+            <span class="tc">{{form.day_of_week_4.label}} <div class="pa2">{{form.day_of_week_4}}</div></span>
+            <span class="tc">{{form.day_of_week_5.label}} <div class="pa2">{{form.day_of_week_5}}</div></span>
+            <span class="tc">{{form.day_of_week_6.label}} <div class="pa2">{{form.day_of_week_6}}</div></span>
+            <span class="tc">{{form.day_of_week_7.label}} <div class="pa2">{{form.day_of_week_7}}</div></span>
+        </section>
+
+        <section class="row center-xs pt5">
+            <button type="submit" class="f6 fw6 ba b--black-20 bg-blue white ph5 pv3 br2 grow">Set alarm</button>
+        </section>
     </form>
 
 </html>
