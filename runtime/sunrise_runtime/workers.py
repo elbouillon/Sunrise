@@ -3,11 +3,10 @@ import time
 import re
 from datetime import datetime
 
-import config
 from web import JsonClient
 
 class CheckAlarmWorker(threading.Thread):
-    def __init__(self):
+    def __init__(self, config):
         threading.Thread.__init__(self)
         self.__client = JsonClient(config.SUNRISE_WEB)
 
