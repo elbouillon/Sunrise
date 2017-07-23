@@ -1,6 +1,4 @@
-from mongoengine import Document, BooleanField, IntField
-
-days_of_weeks = [1,2,3,4,5,6,7]
+from mongoengine import Document, BooleanField, IntField, DateTimeField
 
 class Alarm(Document):
     hour = IntField(min_value=0, max_value=23, precision=0)
@@ -13,4 +11,5 @@ class Alarm(Document):
     day_of_week_5 = BooleanField(default=False, verbose_name='FR')
     day_of_week_6 = BooleanField(default=False, verbose_name='SA')
     day_of_week_7 = BooleanField(default=False, verbose_name='SU')
+    last_run_on = DateTimeField()
         
