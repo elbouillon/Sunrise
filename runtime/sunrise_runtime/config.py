@@ -3,5 +3,5 @@ SUNRISE_WEB = {
     'username': 'sunrise',
     'password': 'sunrise',
     'alarm_json_request': '/alarm/json',
-    'alarm_update_last_run_on_request': '/alarm/update_last_run_on'
+    'alarm_update_last_run_on_request': '/alarm/last_run_on'
 }
