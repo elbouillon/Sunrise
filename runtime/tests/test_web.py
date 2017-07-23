@@ -23,7 +23,7 @@ def test_get_alarm_returning_alarm():
 
 @httpretty.activate
 def test_update_alarm_last_run_on():
-    httpretty.register_uri(httpretty.POST, alarm_update_last_run_on_request,
+    httpretty.register_uri(httpretty.PUT, alarm_update_last_run_on_request,
                            body='OK',
                            status=200,
                            content_type="application/json")
