@@ -1,12 +1,16 @@
+import json
+
+from datetime import datetime
+
 from test_base import BasicTest
 from sunrise_web.alarm.models import Alarm
 
-import json
-
 class AlarmBaseTest(BasicTest):
-    
+
+    expected_time = datetime(2017, 7, 23, 21, 40, 0, 0)
+
     def setUp(self):
-        alarm = Alarm(hour=5,minute=15, active=True, day_of_week_1=True)
+        alarm = Alarm(hour=5,minute=15, active=True, day_of_week_1=True, last_run_on=self.expected_time)
         alarm.save()
     
     def tearDown(self):
@@ -23,6 +27,7 @@ class AlarmDBTest(AlarmBaseTest):
         self.assertEquals(alarm.minute, 15)
         self.assertEquals(alarm.active, True)
         self.assertEquals(alarm.day_of_week_1, True)
+        self.assertEquals(alarm.last_run_on, self.expected_time)
 
 class AlarmWebTest(AlarmBaseTest):
 
@@ -53,6 +58,7 @@ class AlarmWebTest(AlarmBaseTest):
         self.assertFalse(alarm.day_of_week_5)
         self.assertFalse(alarm.day_of_week_6)
         self.assertFalse(alarm.day_of_week_7)
+        self.assertIsNone(alarm.last_run_on) # When saved, the last_run_on datetime must be reset
     
     def test_alarm_json(self):
         response = self.client.get("/alarm/json")
@@ -69,3 +75,15 @@ class AlarmWebTest(AlarmBaseTest):
         self.assertFalse(json_alarm['day_of_week_5'])
         self.assertFalse(json_alarm['day_of_week_6'])
         self.assertFalse(json_alarm['day_of_week_7'])
+        self.assertIsNotNone(json_alarm['last_run_on'])
+
+    def test_update_last_run_on(self):
+        request_time = datetime(2017, 7, 23, 21, 40, 0, 0)
+
+        response = self.client.put("/alarm/last_run_on", data=dict(
+            time = request_time
+        ))
+        self.assertStatus(response, 200)
+        
+        alarm = Alarm.objects.first()
+        self.assertEquals(alarm.last_run_on, request_time)

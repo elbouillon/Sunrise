@@ -27,7 +27,7 @@ def save():
 
     form = AlarmForm(request.form, instance=alarm)
     form.save()
-        
+
     return redirect('/alarm')
 
 @alarm_blueprint.route("/json", methods=['GET'])
@@ -38,3 +38,15 @@ def to_json():
         alarm = Alarm()
     
     return jsonify(alarm)
+
+@alarm_blueprint.route("/last_run_on", methods=['PUT'])
+def update_last_run_on():
+    alarm = Alarm.objects.first()
+
+    if alarm is None:
+         abort(404)
+     
+    alarm.last_run_on = request.form['time']
+    alarm.save()
+
+    return "OK", 200
