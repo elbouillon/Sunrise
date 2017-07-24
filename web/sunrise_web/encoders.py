@@ -15,9 +15,12 @@ class AlarmEncoder(JSONEncoder):
                 'day_of_week_4' : obj.day_of_week_4,
                 'day_of_week_5' : obj.day_of_week_5,
                 'day_of_week_6' : obj.day_of_week_6,
-                'day_of_week_7' : obj.day_of_week_7,
-                'last_run_on' : obj.last_run_on.isoformat()
+                'day_of_week_7' : obj.day_of_week_7
             }
+
+            if obj.last_run_on:
+                alarm_dict['last_run_on'] = obj.last_run_on.isoformat()
+
             return alarm_dict
         else:
             JSONEncoder.default(self, obj)
