@@ -1,3 +1,5 @@
+SECRET_KEY = 'BLA BLA BLA'
+
 # Activate Debugger
 DEBUG = True
 
@@ -18,3 +20,7 @@ MONGODB_SETTINGS = {
     'db': 'sunrise_db',
     'host': 'mongodb://192.168.99.100/sunrise',
 }
+
+# Mongo Debug Toolbar
+MONGO_DEBUG_TB = False
+DEBUG_TB_PANELS = ['flask_mongoengine.panels.MongoDebugPanel']
