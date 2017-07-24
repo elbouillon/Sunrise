@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_basicauth import BasicAuth
 from flask_mongoengine import MongoEngine
+from flask_debugtoolbar import DebugToolbarExtension
 
 from sunrise_web import config
 from sunrise_web.alarm.controllers import alarm_blueprint
@@ -27,5 +28,8 @@ def create_app(**config_overrides):
   
     # Register blueprints
     app.register_blueprint(alarm_blueprint)
+
+    if config.MONGO_DEBUG_TB == True:
+        toolbar = DebugToolbarExtension(app)
 
     return app
