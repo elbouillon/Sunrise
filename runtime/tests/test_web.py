@@ -4,30 +4,31 @@ from urllib.parse import urljoin
 from sure import expect
 
 from sunrise_runtime import config
-from sunrise_runtime.web import Client
+from sunrise_runtime.web import AlarmClient
 
 config_web = config.SUNRISE_WEB
-client = Client(config_web)
+client = AlarmClient(config_web)
 
-alarm_json_request = urljoin(config_web['url'], config_web['alarm_json_request'])
-alarm_update_last_run_on_request = urljoin(config_web['url'], config_web['alarm_update_last_run_on_request'])
+alarm_request = urljoin(config_web['url'], config_web['alarm_request'])
+update_last_run_on_request = urljoin(config_web['url'], config_web['update_last_run_on_request'])
 
 @httpretty.activate
 def test_get_alarm_returning_alarm():
-    httpretty.register_uri(httpretty.GET, alarm_json_request,
+    httpretty.register_uri(httpretty.GET, alarm_request,
                            body='{"json": "OK"}',
-                           content_type="application/json")
+                           content_type="application/json",
+                           status=200)
 
-    alarm = client.get_alarm_as_json()
-    expect(alarm['json']).to.equal('OK')
+    response = client.get_alarm()
+    expect(response['json']).to.equal('OK')
 
 @httpretty.activate
 def test_update_alarm_last_run_on():
-    httpretty.register_uri(httpretty.PUT, alarm_update_last_run_on_request,
-                           body='OK',
-                           status=200,
-                           content_type="application/json")
+    httpretty.register_uri(httpretty.PUT, update_last_run_on_request,
+                            body='OK',
+                            content_type="application/json",
+                            status=200)
 
-    response = client.update_alarm_last_run_on(datetime.now())
+    response = client.update_last_run_on(datetime.now())
     expect(response.status_code).to.equal(200)
     expect(response.text).to.equal('OK')
