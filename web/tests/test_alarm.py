@@ -58,13 +58,14 @@ class AlarmWebTest(AlarmBaseTest):
         self.assertFalse(alarm.day_of_week_5)
         self.assertFalse(alarm.day_of_week_6)
         self.assertFalse(alarm.day_of_week_7)
-        self.assertIsNone(alarm.last_run_on) # When saved, the last_run_on datetime must be reset
+        self.assertIsNone(alarm.last_run_on)
     
     def test_alarm_json(self):
-        response = self.client.get("/alarm/json")
+        response = self.client.get('/alarm/json', content_type='application/json')
         self.assertStatus(response, 200)
 
         json_alarm = json.loads(response.data)
+        
         self.assertEquals(json_alarm['hour'],5)
         self.assertEquals(json_alarm['minute'],15)
         self.assertTrue(json_alarm['active'])
@@ -78,12 +79,13 @@ class AlarmWebTest(AlarmBaseTest):
         self.assertIsNotNone(json_alarm['last_run_on'])
 
     def test_update_last_run_on(self):
-        request_time = datetime(2017, 7, 23, 21, 40, 0, 0)
+        time = datetime(2017, 7, 23, 21, 40, 0, 0).isoformat()
+        data = json.dumps(dict(time=time))
 
-        response = self.client.put("/alarm/last_run_on", data=dict(
-            time = request_time
-        ))
+        response = self.client.put('/alarm/last_run_on',
+            content_type='application/json',
+            data=data)
         self.assertStatus(response, 200)
         
-        alarm = Alarm.objects.first()
-        self.assertEquals(alarm.last_run_on, request_time)
+        alarm = Alarm.objects.first()   
+        self.assertEquals(alarm.last_run_on.isoformat(), time)

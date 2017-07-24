@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, jsonify
+from flask import Blueprint, render_template, request, redirect, jsonify, abort
 
 from .models import Alarm
 from .forms import AlarmForm
@@ -26,27 +26,34 @@ def save():
         alarm = Alarm()
 
     form = AlarmForm(request.form, instance=alarm)
-    form.save()
+    form.populate_obj(alarm)
+
+    alarm.last_run_on = None
+    alarm.save()
 
     return redirect('/alarm')
 
 @alarm_blueprint.route("/json", methods=['GET'])
-def to_json():
+def get_alarm_as_json():
     alarm = Alarm.objects.first()
     
     if alarm is None:
-        alarm = Alarm()
-    
+        abort(404)
+
     return jsonify(alarm)
 
 @alarm_blueprint.route("/last_run_on", methods=['PUT'])
 def update_last_run_on():
     alarm = Alarm.objects.first()
-
+    
     if alarm is None:
-         abort(404)
-     
-    alarm.last_run_on = request.form['time']
-    alarm.save()
+        abort(404)
+   
+    json = request.get_json()
+    if json is None:
+        abort(400)
 
+    alarm.last_run_on = json['time']
+    alarm.save()
+   
     return "OK", 200
