@@ -21,7 +21,7 @@ class CheckAlarmWorker(threading.Thread):
                 alarm = self.__alarm_client.get()
                 match = self.__check_alarm(alarm)
             except:
-                print 'Unexpected error:', sys.exc_info()[0]
+                print('Unexpected error: {}').format(sys.exc_info()[0])
 
         try:
             now = datetime.now().replace(second=0, microsecond=0)  
