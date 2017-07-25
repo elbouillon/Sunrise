@@ -4,6 +4,7 @@ from flask_mongoengine import MongoEngine
 from flask_debugtoolbar import DebugToolbarExtension
 
 from sunrise_web import config
+from sunrise_web.encoders import AlarmEncoder
 from sunrise_web.alarm.controllers import alarm_blueprint
 
 # MongoEngine
@@ -28,6 +29,8 @@ def create_app(**config_overrides):
   
     # Register blueprints
     app.register_blueprint(alarm_blueprint)
+
+    app.json_encoder = AlarmEncoder
 
     if config.MONGO_DEBUG_TB == True:
         toolbar = DebugToolbarExtension(app)
